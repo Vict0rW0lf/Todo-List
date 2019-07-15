@@ -1,29 +1,49 @@
 package com.todo.app.todoapp.resource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.todo.app.todoapp.entity.Item;
-import com.todo.app.todoapp.repository.ItemRepository;
+import com.todo.app.todoapp.service.ItemService;
 
 @RestController
+@RequestMapping("/item")
 public class ItemResource {
 
 	@Autowired
-	private ItemRepository itemRepo;
+	private ItemService itemService;
 	
-	@GetMapping("")
+	@GetMapping("/all")
 	public List<Item> getItems() {
-		List<Item> items = new ArrayList<>();
-		
-		itemRepo.findAll().forEach(items::add);
-		
-		return items;
+		return itemService.getAllItems();
 	}
 	
+	@PostMapping
+	public Item saveItem(Item item) {
+		return itemService.saveItem(item);
+	}
+	
+	@PutMapping
+	public Item replaceItem(Item item) {
+		return itemService.replaceItem(item);
+	}
+	
+	@PatchMapping
+	public Item updateItem(Item item) {
+		return itemService.updateItem(item);
+	}
+	
+	@DeleteMapping
+	public void deleteItembyId(long id) {
+		itemService.deleteItemById(id);
+	}
 	
 }
