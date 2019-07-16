@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,23 +28,28 @@ public class ItemResource {
 	}
 	
 	@PostMapping
-	public Item saveItem(Item item) {
+	public Item saveItem(@RequestBody Item item) {
 		return itemService.saveItem(item);
 	}
 	
 	@PutMapping
-	public Item replaceItem(Item item) {
+	public Item replaceItem(@RequestBody Item item) {
 		return itemService.replaceItem(item);
 	}
 	
 	@PatchMapping
-	public Item updateItem(Item item) {
+	public Item updateItem(@RequestBody Item item) {
 		return itemService.updateItem(item);
 	}
 	
 	@DeleteMapping
 	public void deleteItembyId(long id) {
 		itemService.deleteItemById(id);
+	}
+	
+	@DeleteMapping("/all")
+	public void deleteAll() {
+		itemService.deleteAll();
 	}
 	
 }
