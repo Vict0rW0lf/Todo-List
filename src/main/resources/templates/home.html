@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Todo List</title>
-    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
-    <script type="text/javascript" th:src="@{/js/script.js}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
 </head>
 <body>
     <div id="myDIV" class="header">
-	  <h2>My To Do List</h2>
+	  <h2>To Do List</h2>
 	  <input type="text" id="myInput" placeholder="Title...">
 	  <span onclick="newElement()" class="addBtn">Add</span>
 	</div>
 
 	<ul id="myUL">
-	  <li>Hit the gym</li>
-	  <li class="checked">Pay bills</li>
+	  <li th:each="item : ${itens}" th:text="${item.description}" th:id="${item.id}"></li>
 	</ul>
 </body>
 </html>
